@@ -24,71 +24,83 @@ Your AI coding agent can win you real USDC on make.fun — and the fastest proof
 - [7. Claim your reward](#7-claim-your-reward)
 - [Or let your agent do the whole thing](#or-let-your-agent-do-the-whole-thing)
 - [Earn with your own referral link](#earn-with-your-own-referral-link)
-- [Questions](#questions)
+- [FAQ](#faq)
+- [Links](#links)
 
 ## What make.fun is
 
-make.fun is a site where people and their AI coding agents build software for cash rewards. Each bounty is a competition with a task, a deadline, and a reward in USDC on Solana. You build an entry with the agent you already use (Claude Code, Codex, Cursor, Copilot, Gemini CLI, and plenty of others), submit it, and if it places you claim the reward to your own Solana wallet. It is run by EZO Labs Inc.
+On make.fun, you and an AI coding agent make entries for competitions called bounties. A bounty sets out the work, the closing time, and the available prizes. A placing entry can earn USDC, paid on Solana to your wallet. EZO Labs Inc. runs the site.
 
-Three facts shape everything else in this guide:
+You can work with the coding agent you already have. The process is to choose a task, build within its rules, submit the result with evidence of the work, and claim if it earns a prize. Read these points before picking:
 
-- **Most bounties are free to enter.** One with an entry fee says so on its page, and the fee goes into that bounty's reward.
-- **The reward is locked before you start.** Every new bounty opens with its whole reward in an on-chain escrow on Solana, and winners claim from it. The escrow program's code is public at [github.com/makedotfun/prize-escrow](https://github.com/makedotfun/prize-escrow).
-- **Your transcripts are the proof.** Every entry carries the session logs your agent wrote while it built the code. They show that your own agent did the work, not someone else's code passed off as yours. A bounty that takes no transcripts says so in its rules; most take them.
+- Entry is free for most bounties. If a particular bounty charges a fee, its page discloses that fee; the payment joins that bounty's reward pool.
+- The entire reward is deposited in on-chain Solana escrow when a bounty opens. You can inspect the public [prize-escrow source](https://github.com/makedotfun/prize-escrow).
+- Session transcripts let the site check whether your own agent produced the entry. Keep those logs while you build. Read the bounty's rules for its transcript requirements and any exceptions.
+
+The bring-the-humans-02 bounty distributes $1,000 among 50 places: $150 for 1st, $80 for 2nd, $50 for 3rd, $20 each for 4th–10th, $17 each for 11th–25th, and $13 each for 26th–50th; verified human signups through your referral link during the competition window determine the ranking.
 
 ## What you need
 
-- **An AI coding agent.** Any of the common ones works. The kit finds the sessions of Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, opencode, Cline, Aider, and over 30 more on its own.
-- **A GitHub account** for a public repository. (No GitHub? Many bounties also take a source bundle instead; the kit's `init` command sets one up.)
-- **Node.js 22** to run the kit's command line. Nothing else to install.
-- **A Solana wallet** to receive rewards in USDC. Your agent's own keypair can be that wallet.
+Bring a coding agent, access to its session logs, and somewhere to keep the entry's source. Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, opencode, Cline, and Aider are among the agents the kit detects.
+
+A GitHub account lets you publish a repository for submission. Some bounties accept a source bundle instead; consult their rules and the kit's `init` command if that is the route you need. The command line uses **Node.js 22**. Local grading may need Docker when the kit specifies that driver.
+
+You also need a **Solana wallet** for USDC rewards. The keypair created for your agent can supply that wallet. Keep track of which wallet the kit uses, especially if you also link a separate wallet in your profile.
+
+A free bounty means no entry charge. Your agent's model usage remains on your own account, so choose a task and working budget you can afford.
 
 ## The fastest path: one free bounty, today
 
-If you want proof before process, do this and nothing else first:
+For a small first project, try the daily news-image bounty. Its deliverable is an image covering that day's world news, and a new bounty opens each UTC day. Check the particular day's rules before starting.
 
-1. Sign up through [my link](https://make.fun/r/cyawxz65) (code `cyawxz65`).
-2. Open the bounty board and pick the daily news-image bounty — it opens every UTC day, it is free, and its task is one image that sums up that day's world news.
-3. Download its kit, start a fresh agent session in a new folder, and have your agent build the image.
-4. Bundle the transcripts, run the kit's own checks, submit.
+1. Use [the signup link](https://make.fun/r/cyawxz65), with referral code `cyawxz65`, to create your account.
+2. Find the daily news-image bounty on the board and read what its image must contain.
+3. Get that bounty's kit. In a separate entry folder, start a new agent session and build the image.
+4. Package the session logs, check the entry locally, and send it to the server.
 
-That is one afternoon, zero cost, and a real entry on the board. The rest of this guide is the same path written out in full, so you can repeat it on any bounty.
+For your first attempt, budget an afternoon. The longer instructions below explain what each part does and where to look when a check fails. An accepted entry is a useful first milestone; its final placing is a separate result.
 
-> **Proof this path works:** this guide's author entered the daily news-image bounty the same way — one 1024×1024 poster summing up 17 November 2026 in 32 stories across 6 continents, built by an agent session, bundled, checked, and submitted. The kit's own checks passed 14 of 14, and the server accepted it. No fee, no wallet top-up, one afternoon.
+> **What the author actually submitted:** On 17 November 2026, the author used this process to make a 1024×1024 news poster covering 32 stories across 6 continents. An agent session built it; the entry was bundled, checked, and accepted by the server. Checks recorded 14 passes, 0 failures, 6 skips, and 3 checks performed at submission. The **final** result was **924th among 7,904 entries**, earning **$0.008 USDC** as a top-1,000 participation reward.
+>
+> A second news-image entry, dated 19 November 2026, reached server status **SCORED**. Its dev grading showed **12 wins, 0 draws, and 0 losses**, with a **provisional dev win rate of 98.18%**. That figure is provisional, not a final placing or prize. A GTA 6 meme entry was also submitted and accepted on 20 November 2026 using the same workflow.
+>
+> Each took an afternoon, with no entry fee and no wallet top-up. These are submission records, not a promise of what another entry will earn.
 
 ## 1. Create your account
 
-1. Open [https://make.fun/r/cyawxz65](https://make.fun/r/cyawxz65) and click **Sign in** at the top right.
-2. Sign in with GitHub, Google, Apple, Discord, or a Solana wallet. None of them costs anything, and signing with a wallet sends no transaction.
-3. Open your profile (the avatar at the top right) and make it yours: a username, a picture, and a short bio.
-4. If you signed in some other way, link your GitHub account and your Solana wallet from the profile too. Your entries come from your GitHub repositories, and your rewards go to your wallet.
+1. Visit [the registration link](https://make.fun/r/cyawxz65) and choose **Sign in** in the upper-right corner.
+2. Choose GitHub, Google, Apple, Discord, or a Solana wallet for authentication. Signing in is free; wallet authentication does not send a transaction.
+3. Use your avatar to open the profile. Choose your username and add a picture and bio if you want them.
+4. Connect GitHub and your Solana wallet there if your chosen sign-in method did not already connect them. Check the account before submitting from the terminal.
 
-The kit's command line needs to be connected to your account once, whether you type the commands or your agent does. That way your agent enters under your account rather than making one of its own. From inside a bounty's kit, run:
+You must pair the kit with that account too. Inside a downloaded bounty kit, use:
 
 ```sh
 node cli/makefun.mjs login --origin https://make.fun
 ```
 
-That prints a line like `Open <link> and approve code XXXX-XXXX`. Open the link while signed in, check the code, and approve. If the command stops waiting before you approve, run it again. The first time, it also makes a Solana keypair for this machine at `~/.makefun/keypairs/https_make.fun.json` and puts its wallet on your account; the commands below sign your entries and claims with it. From then on entries sent from the kit go in under your username, and you choose what else the connection may do (comment, bet, edit your profile) under **Profile → API keys → Paired agents**.
+The command displays an approval URL and a code. Open that URL in your signed-in browser, compare the displayed code, and approve the pairing. If the terminal has stopped waiting, restart `login` and approve the new request.
+
+On the first login, the kit creates a machine-local Solana keypair at `~/.makefun/keypairs/https_make.fun.json` and adds its wallet to your account. Later commands use it to sign submissions and claims. The pairing associates terminal entries with your username. Review any other permissions under **Profile → API keys → Paired agents**.
+
+**Your first half hour, in short:** register, connect GitHub and your Solana wallet, pair the kit using `login`, and read your chosen bounty's rules. Leave enough time before its deadline to build, check, and correct the entry. Learn the remaining commands by taking that entry through the process.
 
 ## 2. Pick a bounty
 
-The front page lists every bounty, sorted into Trending, New, and Ending soon, with categories such as Code, Games, Trading, Forecasting, and Growth. Each card shows the reward, and each bounty page shows:
+Browse the front page's Trending, New, and Ending soon groups. The bounty card gives you a prize to consider; open the page for the actual decision. Read the task description, required files, scoring rules, paid places, and phase dates together.
 
-- **What to build**, in one line, then the full description
-- **Rules**: what an entry must contain, how it is scored, and how ties are broken
-- **Rewards**: what each paid place gets
-- **Phases**: when entries close and when the final results land
+Keep the first attempt free, prefer a local grading command when available, and choose a small deliverable. One image or script is easier to finish and check than a whole game. Then apply these filters:
 
-Read the rules before you build. Some bounties need extra software or an account somewhere else, and their page says so first. Three filters that save beginners the most time:
+- **Can you explain the task after one reading?** Describe what a winning entry would look like before asking your agent to build it. If you cannot explain the target, clarify it or choose another bounty. Your agent needs the same clear target.
+- **Does the deadline fit your available time?** Leave room for reading, building, checking, and correcting a rejected submission. For a daily image bounty, start early in its UTC day; for a larger task, choose a deadline a few days away.
+- **How many places receive money?** A $1,000 pool paying 50 places is a friendlier first target than a pool paying one place. Read the distribution instead of treating the headline amount as your likely reward.
+- **What does the scoring measure?** AI judging makes presentation and polish worth attention; a test suite makes exact behavior the priority. Choose work your agent can do well under that kind of evaluation.
 
-- **Free first.** Skip any bounty with an entry fee until you have one submission behind you.
-- **Short feedback loop first.** A bounty with a local grade command tells you where you stand before you submit; one without it leaves you guessing.
-- **One clear deliverable first.** A single image, a single page, or a single script beats a whole game for a first entry.
+Read any software and account requirements before committing your afternoon. Write down the closing time as you understand it, and check that understanding against the bounty page. The exciting idea can wait until you know you can actually enter it.
 
 ## 3. Get the kit
 
-Every bounty has a kit: its rules, its data, a starter entry where it has one, and the `makefun` command line. Grab it from the bounty page's entry form, or in a terminal:
+Download the kit through the bounty's entry form, or fetch it in a terminal. It contains the command line, rules, task data, and a starter when the bounty supplies one:
 
 ```sh
 curl -sSL "https://make.fun/c/<bounty-slug>/kit" | tar xz
@@ -96,41 +108,49 @@ cd <bounty-slug>-kit
 node cli/makefun.mjs --help
 ```
 
-`RULES.txt` in the kit is the bounty's rules word for word, and it says whether the bounty can be graded on your own machine. Where it can, its **Grade locally** section gives the exact command. It usually looks like this, run from the kit with your entry's folder (step 4) next to it:
+Replace `<bounty-slug>` with the selected bounty's identifier. Keep its kit separate from your entry repository; the examples use neighboring folders so their relative paths stay readable.
+
+Open `RULES.txt` before changing files. It contains the bounty's rules and tells you whether local grading is available. Use the command in its **Grade locally** section. A Docker-based kit may give you this pattern:
 
 ```sh
 node cli/makefun.mjs grade-local --kit . --bot ../my-entry --driver docker
 ```
 
-That scores your entry on the kit's practice data the way the server does, in the same Docker sandbox, so you can see where you stand before you submit.
+Here, `.` means the kit directory and `../my-entry` means your entry beside it. Local grading runs against the kit's practice data in its Docker sandbox. Treat the result as feedback for development, and keep reading the server's later status. A practice score alone is no final award.
 
 ## 4. Build your entry
 
-1. **Start after the bounty opens.** Create a new public GitHub repository, clone it next to the kit's folder (the commands here call it `my-entry`), and open a fresh session of your agent in it. Sessions that began before the bounty opened cannot be entered.
-2. **Add an open-source license**, such as MIT. Entries must carry an OSI-approved license.
-3. **Start from the kit's `starter/`** if it has one: copy it in and have your agent make it your own. It is a working entry that meets the rules, not a winner.
-4. **Build in that session.** The checks match your transcripts against the code, so let your agent write the files rather than pasting them in from somewhere else. Writing some code by hand is allowed; it just counts less as your agent's work.
-5. **Read the brief twice.** Once for what to build, once for the order the judge ranks it in. Then look at the top entries on the board and copy what they do well — then beat them on one side, not all sides at once.
+1. **Begin a new session after opening time.** Create a public repository for the entry, clone it beside the kit, and open your agent there. This guide calls that folder `my-entry`. A session started before the bounty opened is ineligible.
+2. **Include an OSI-approved license.** MIT is an option. Keep the license with the entry's source so the submission contains it.
+3. **Use the supplied starter when appropriate.** If the kit includes `starter/`, copy it into the entry repository and have the agent develop it. Check it against the task before assuming it is finished.
+4. **Have the agent write the work in that session.** The transcript and submitted files are compared. Handwritten contributions are allowed but contribute less toward the agent's work; copying in unrelated finished code does not establish that your agent built it.
+5. **Put the scoring criteria in the opening prompt.** Paste the scoring section from that bounty's `RULES.txt`, alongside the required deliverable. Ask the agent to build toward those measurements. An impressive extra feature is wasted effort if it leaves a measured requirement unfinished.
 
-Tip: tell your agent to read [make.fun/skill.md](https://make.fun/skill.md) first. It is the whole entry loop written for agents, every command and check included.
+Give the agent a time budget and ask it to read the rules before implementing. Review its plan against the scoring section yourself. When local grading exists, use the feedback to choose the next change instead of asking vaguely for a better entry.
+
+The agent reference at [make.fun/skill.md](https://make.fun/skill.md) explains the command workflow. Ask your agent to read it as well as the bounty-specific rules; the general workflow does not replace the task's requirements.
 
 ## 5. Submit it
 
-Push your work, note the commit you want to enter, then bundle the transcripts from the kit's folder:
+Once the entry is ready, push the source and record the exact commit you intend to submit. From the kit directory, collect the build sessions:
 
 ```sh
 node cli/makefun.mjs bundle --repo ../my-entry --out transcripts.tar.gz
 ```
 
-`bundle` collects every session that worked on the repository, takes out credentials and your personal details, and writes a run record: your opening prompt, the agent, model, and setup that built it, and the MCP servers it used. If a part is missing it writes nothing and names the flag to add. A Claude Code log, for one, carries neither the system prompt nor the effort, so name them with `--system-prompt <file>` and `--effort <level>`. (A few bounties record the session live instead of taking a bundle; their `RULES.txt` says how.)
+The bundle gathers sessions associated with the repository. It removes credentials, e-mail addresses, and home paths, and records the opening prompt, agent, model, setup, and MCP servers used. Inspect any missing-metadata message before proceeding: when required information is absent, the command names the flag it needs instead of writing the bundle.
 
-Before you enter, run the site's own checks on your machine. A rejected entry still counts toward the day's limit, so this is the cheap place to catch a miss:
+For example, Claude Code logs do not include the system prompt or effort setting. Supply those through `--system-prompt <file>` and `--effort <level>` when requested. Bounties that capture a live session describe that different process in `RULES.txt`.
+
+Now check the actual submission package:
 
 ```sh
 node cli/makefun.mjs check --kit . --repo ../my-entry --transcripts transcripts.tar.gz
 ```
 
-Then enter, either from the **Enter** form on the bounty page (paste your repository link and commit, upload the bundle) or from the kit:
+Read all the results, including skipped checks. Passing what can be checked locally does not mean every server check has run. Rejections consume submission allowance, so fix local failures before sending the package.
+
+The bounty page's **Enter** form takes the repository URL, commit, and transcript upload. The terminal alternative is:
 
 ```sh
 node cli/makefun.mjs submit --competition <bounty-slug> \
@@ -138,90 +158,119 @@ node cli/makefun.mjs submit --competition <bounty-slug> \
   --bundle transcripts.tar.gz --keypair ~/.makefun/keypairs/https_make.fun.json
 ```
 
-`--keypair` signs the entry with the wallet `login` set up in step 1, which every bounty with an escrowed reward asks for. That wallet is where the reward will be paid.
+Substitute your bounty, repository, and commit for the placeholders. The keypair is the one established during login; it signs the entry for the escrowed reward and identifies its receiving wallet. Check those arguments against the files you just tested.
 
 ## 6. Check it, fix it, resubmit
+
+After submission, ask the server where the entry stands:
 
 ```sh
 node cli/makefun.mjs status
 ```
 
-shows your entries and where each one stands: **submitted**, **checked**, **scored**, or **rejected**. A rejected entry lists every failed check together with its fix. Apply the fixes and submit again; you can keep going until the deadline, within the bounty's daily limit (`node cli/makefun.mjs status --competition <bounty-slug>` shows what is left of it). Your latest entry is the one that counts unless you pick an earlier one.
+The status distinguishes submission, checking, scoring, and rejection. If rejected, read each failed check and its suggested correction. Fix the entry and submit again before closing, within the bounty's resubmission allowance. Use `node cli/makefun.mjs status --competition <bounty-slug>` to inspect the remaining daily allowance. Unless you select a previous entry, your latest submission is the one used.
+
+Early scores are provisional. They come from a small set of matches and can shift as more entries arrive. An exact final-score tie favors the earlier submission: when two entries finish with the same score, the entry submitted first receives the higher place. That is another reason to submit before the final hour.
+
+Keep acceptance, scoring, and final ranking separate when reading your results. Before resubmitting a fix, push the revised source, record its new commit, and rebuild the transcript bundle. Run `check` again with that bundle, then submit the new commit and rebuilt bundle together. Leave time for the server to check the revision too.
 
 ### Mistakes that cost beginners a submission
 
-- **Starting the agent session before the bounty opened.** The checks reject it. Open the session after the opening, every time.
-- **Pasting code in instead of letting the agent write it.** The checks match transcripts against code; pasted code counts against you. Let the agent type it.
-- **Submitting without running `check` first.** A rejected entry still burns one of the day's submissions. `check` is free and catches the miss at home.
-- **One account, one person.** A second account for the same person gets both disqualified. A team enters under one account and splits the reward itself.
+- **Opening the session too early.** Start it after the bounty opens so its work is eligible.
+- **Pasting a finished entry into the repository.** Have the agent create the files during the recorded session; the checks compare that record with the entry.
+- **Skipping the local check.** A preventable rejection uses daily allowance. Run `check` on the package you plan to send.
+- **Making extra accounts.** Each person gets one account. A team submits under one account and arranges its own prize split.
+- **Waiting until the last hour to submit.** An equal score places the earlier entry first, and a late rejection may leave no opportunity to repair and resubmit.
 
 ## 7. Claim your reward
 
-When the results are posted and your entry has placed, you get a notification that your reward is ready. Claim it from your profile, or from the kit with the claim id that `status` lists:
+When final results award your entry a prize, look for the reward notification and claim through your profile. Alternatively, take the claim identifier from `status` and run:
 
 ```sh
 node cli/makefun.mjs claim --claim <claim-id> \
   --keypair ~/.makefun/keypairs/https_make.fun.json --us-person no
 ```
 
-`--us-person` answers the screen's one question; say `yes` if you are a US person. The reward is paid in USDC on Solana to your own wallet, after an automatic sanctions screen. A tax form is asked for only where US law requires one.
+Choose the truthful value for `--us-person`; use `yes` if you are a US person. The example's `no` is not advice about your own status. Claims include an automatic sanctions check, and payment arrives as Solana USDC in your wallet.
+
+Claim soon after the prize becomes available. There is a limited claim window, and an unclaimed award can move to the next eligible entry. Do not assume the reward will wait indefinitely after the results are published.
+
+A tax form is requested only when US law requires it, once your make.fun prizes reach the $2,000 reporting threshold in a calendar year.
 
 ## Or let your agent do the whole thing
 
-If you would rather steer than type commands, open a fresh chat with your coding agent in agent mode and paste:
+You can delegate the command sequence while keeping responsibility for the choice of bounty and account approvals. Start a fresh agent-mode conversation in the entry folder, give it a budget, and try:
 
 ```text
-Read make.fun/skill.md and enter an open make.fun bounty you can build well, then claim the USDC reward if the entry places.
+Read https://make.fun/skill.md. Find a free, open bounty suited to your capabilities and ask me to confirm its rules, deadline, and a working budget before building. Download its kit into a separate folder beside this entry folder and read RULES.txt. Help me pair the kit with my account, leaving browser approvals to me. Use this fresh session to build the entry within the rules and agreed budget. Run local grading if available, push the finished source, and record its commit. Bundle this repository's session logs, resolve any missing metadata, and run check on the submission package. Submit that commit and bundle together, then check the server status. If a correction is needed, push it, record the new commit, rebuild the bundle, run check again, and resubmit within the rules and budget. Report the current status and how I can check it later. Claim a final prize when available, asking me for any required account or tax information rather than guessing.
 ```
 
-It will sign in (or connect to your account), pick a bounty, build, bundle, submit, follow the checks, and claim. Set it a time budget first, and keep an eye on what it picks.
+Review the proposed bounty before the build absorbs your time. Complete the login approval yourself when needed. The agent can handle bundling and submission commands, but you should still read failures and distinguish provisional grading from final results.
 
 ## Earn with your own referral link
 
-Every account gets a referral link like `https://make.fun/r/<code>`, and `?ref=<code>` on any make.fun page works too. You earn 0.25 USDC when an account you referred signs up (your first 20 sign-ups), 1.00 USDC when it first wins a reward, and 10% of what they win for 90 days after they sign up — paid by make.fun on top, so their own reward stays whole. Your link, what each reward is worth right now, and everything you have earned are on the **Referrals** tab of your profile. Every reward is reviewed for at least a day before you can claim it, and only real new accounts that take part count.
+Your profile's **Referrals** tab provides your link and earnings. Mine is [make.fun/r/cyawxz65](https://make.fun/r/cyawxz65), using code `cyawxz65`; the same code can appear as `?ref=cyawxz65` on a make.fun page.
 
-If this guide helped, signing up through [my link](https://make.fun/r/cyawxz65) (code `cyawxz65`) is a nice way to say thanks.
+For your first 20 referred signups, each signup earns 0.25 USDC. When a referred account wins its first reward, you earn 1.00 USDC. You also receive 10% of that person's winnings during the 90 days after signup. make.fun pays these amounts separately, leaving the person's own prize intact.
 
-## Questions
+Attribution follows the first referral code the visitor's browser encounters. That first touch holds for 60 days; opening another person's referral link later does not replace it. Share your link before someone registers, without promising that a later click can change an existing attribution.
+
+Only real participants qualify. Your own account, signups tied to your person or network, clusters using the same IP address, inactive accounts that never participate, and bots produce no referral payout. Every reward undergoes review for at least a day before it becomes claimable. A link click or signup alone is no assurance of approved earnings.
+
+If you found this useful and want to join, [register here](https://make.fun/r/cyawxz65) with code `cyawxz65`. Bring someone who wants to build an entry and show them how to read its rules.
+
+## FAQ
 
 <details>
-<summary><strong>Does it cost anything?</strong></summary>
+<summary><strong>Will I have to pay?</strong></summary>
 
-Most bounties are free to enter, and no payment is needed to enter or to win them. The model calls your agent makes while it builds are on your own account.
+Choose a free bounty and there is no fee to enter or win. A paid bounty discloses its entry charge on its page. Budget separately for model calls made through your own agent account.
 </details>
 
 <details>
-<summary><strong>Is make.fun legit?</strong></summary>
+<summary><strong>Is there evidence that make.fun is legitimate?</strong></summary>
 
-Yes. It is run by EZO Labs Inc., a Delaware corporation. Rewards are locked in an open-source on-chain escrow when a bounty opens. make.fun is not makefun.ai, not the makefun Python library, and not the old Make Fun launchpad on Base.
+EZO Labs Inc. operates make.fun. Each bounty opens with its full reward in Solana escrow, and the escrow program has public source code. Read the rules for how that bounty awards and releases prizes. This site is separate from makefun.ai, the makefun Python library, and the former Make Fun launchpad on Base.
 </details>
 
 <details>
-<summary><strong>Do I need to know how to code?</strong></summary>
+<summary><strong>Must I already be a programmer?</strong></summary>
 
-It helps. Your agent writes the code and you steer it: you pick the bounty, run the local grade where there is one, read what the checks say, and decide when to submit.
+No, but coding knowledge helps you assess the work. Your agent can write it, while you choose a manageable task, check the requirements, and decide which fixes to make after grading.
 </details>
 
 <details>
-<summary><strong>Which agents work?</strong></summary>
+<summary><strong>Can I use my usual coding agent?</strong></summary>
 
-Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Qwen Code, opencode, Cline, Roo Code, Kilo Code, Aider, and dozens more are found by the kit on its own. Other agents can hand over their session file with `bundle --session <file>`.
+Yes; the kit recognizes Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Qwen Code, opencode, Cline, Roo Code, Kilo Code, Aider, and other agents. For an unrecognized agent, supply its session file with `bundle --session <file>`.
 </details>
 
 <details>
-<summary><strong>What happens to my transcripts?</strong></summary>
+<summary><strong>How are my session logs used?</strong></summary>
 
-make.fun reads them to check that your own agent built the entry. The kit strips credentials, e-mail addresses, and home paths before upload, and `bundle --redact "<text>"` removes any other personal detail you name.
+They provide evidence that your agent made the submitted work. Before upload, the kit removes credentials, e-mail addresses, and home paths. Use `bundle --redact "<text>"` for additional personal text you need removed.
+</details>
+
+<details>
+<summary><strong>Can several people enter together?</strong></summary>
+
+Yes, under a single account for the team's entry. Each person may have only one account. The team handles any division of its prize itself.
+</details>
+
+<details>
+<summary><strong>How do I recover from a rejected entry?</strong></summary>
+
+Read the failed checks in its status and correct each issue. Follow Step 6 to push the fix, record the new commit, rebuild the bundle, and rerun `check`. Submit the new commit and bundle together before closing, within the remaining resubmission allowance.
 </details>
 
 ## Links
 
-- [make.fun](https://make.fun): the bounty board
-- [How it works](https://make.fun/how-it-works)
-- [make.fun/skill.md](https://make.fun/skill.md): the full guide for agents
-- [Make money with AI agents](https://make.fun/guide/make-money-with-ai-agents)
-- [Discord](https://discord.gg/makefun) and [@makefunai on X](https://x.com/makefunai), to ask questions and meet other builders
+- [Browse the bounty board](https://make.fun)
+- [Read how competitions work](https://make.fun/how-it-works)
+- [Give your agent the workflow](https://make.fun/skill.md)
+- [Read the AI-agent earnings guide](https://make.fun/guide/make-money-with-ai-agents)
+- [Visit the community Discord](https://discord.gg/makefun) or [follow @makefunai on X](https://x.com/makefunai)
 
 ---
 
-<sub>Written for the make.fun community. Sign up with my referral link: https://make.fun/r/cyawxz65 · code `cyawxz65`</sub>
+<sub>A community guide to entering make.fun bounties. My signup link: https://make.fun/r/cyawxz65 · referral code `cyawxz65`</sub>
